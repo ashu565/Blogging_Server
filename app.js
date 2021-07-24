@@ -3,6 +3,7 @@ const morgan = require("morgan");
 const authRoute = require("./routes/authRoutes");
 const userRoute = require("./routes/userRoutes");
 const blogRoute = require("./routes/blogRoutes");
+const razorpayRoute = require("./routes/rozorpayRoutes");
 const AppError = require("./utils/AppError");
 const globalErrorHandler = require("./utils/globalErrorHandler");
 const cors = require("cors");
@@ -20,6 +21,7 @@ app.use(cors());
 app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/auth", userRoute);
 app.use("/api/v1/blog", blogRoute);
+app.use("/api/v1/premium", razorpayRoute);
 
 app.all("*", (req, res, next) => {
   next(new AppError(`can't find ${req.originalUrl} on this server`), 404);

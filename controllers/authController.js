@@ -67,7 +67,7 @@ exports.protect = async (req, res, next) => {
       return next(new AppError("You are not logged in"), 400);
     }
     const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
-    console.log(decoded);
+    // console.log(decoded);
     const user = await User.findOne({ _id: decoded.id });
     user.password = undefined;
     req.user = user;
