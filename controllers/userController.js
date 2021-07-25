@@ -12,7 +12,6 @@ exports.updateMe = async (req, res, next) => {
         filtered_updated_details[obj] = updated_details[obj];
       }
     });
-    console.log(filtered_updated_details);
     const updatedUser = await User.findByIdAndUpdate(
       req.user._id,
       filtered_updated_details,

@@ -32,6 +32,12 @@ const blogSchema = mongoose.Schema(
   }
 );
 
+// This is Text Index to search in Mongo DB
+blogSchema.index({
+  title: "text",
+  description: "text",
+});
+
 /* don't get confuse between virtual populate and normal populate 
  Normal Populate -> Here Just you have to populate the data you defined in your own schema 
                     like author is Here from User database and you want to populate so you

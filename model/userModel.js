@@ -37,6 +37,22 @@ const userSchema = mongoose.Schema(
     cloudinary_id: {
       type: String,
     },
+    premium: {
+      type: Boolean,
+      default: false,
+    },
+    razorpay_payment_id: {
+      type: String,
+      select: false,
+    },
+    razorpay_order_id: {
+      type: String,
+      select: false,
+    },
+    razorpay_signature: {
+      type: String,
+      select: false,
+    },
     passwordResetToken: String,
     passwordResetExpires: Date,
   },

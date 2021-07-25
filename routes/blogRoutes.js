@@ -12,6 +12,7 @@ router.get(
   authController.protect,
   blogController.getAllBlogFromUser
 );
+router.get("/getSearchedBlog", blogController.searchedBlog);
 router.patch(
   "/updateBlog/:id",
   authController.protect,

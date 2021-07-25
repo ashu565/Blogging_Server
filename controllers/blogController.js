@@ -44,6 +44,24 @@ exports.getBlog = async (req, res, next) => {
     next(err);
   }
 };
+
+exports.searchedBlog = async (req, res, next) => {
+  try {
+    const searched_word = req.query.word;
+    const document = await Blog.find({
+      $text: {
+        $search: searched_word,
+        $caseSensitive: false,
+      },
+    });
+    res.status(201).json({
+      document,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
 exports.getAllBlogFromUser = async (req, res, next) => {
   try {
     const documents = await Blog.find();
