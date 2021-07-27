@@ -1,5 +1,6 @@
 const Blog = require("../model/blogModel");
 const APIFeatures = require("../utils/ApiFeatures");
+const cloudinary = require("../utils/cloudinary");
 exports.createBlog = async (req, res, next) => {
   try {
     const { author, title, description } = req.body;
@@ -97,6 +98,18 @@ exports.updateBlog = async (req, res, next) => {
     next(err);
   }
 };
+
+exports.uploadImages = async (req, res, next) => {
+  try {
+    const result = await cloudinary.uploader.upload(req.file.path);
+    res.status(201).json({
+      url: result.secure_url,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
 exports.deleteBlog = async (req, res, next) => {
   try {
     await Blog.findByIdAndDelete(req.params.id);
@@ -108,7 +121,6 @@ exports.deleteBlog = async (req, res, next) => {
     next(err);
   }
 };
-
 exports.updateLikes = async (req, res, next) => {
   try {
     const { userId, blogId } = req.body;

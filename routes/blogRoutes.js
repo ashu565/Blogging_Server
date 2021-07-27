@@ -2,9 +2,16 @@ const express = require("express");
 const authController = require("../controllers/authController");
 const blogController = require("../controllers/blogController");
 const commentController = require("../controllers/commentController");
+const multer = require("../utils/multer");
 const router = express.Router();
 
 router.post("/createBlog", authController.protect, blogController.createBlog);
+router.post(
+  "/imageupload",
+  authController.protect,
+  multer.single("image"),
+  blogController.uploadImages
+);
 router.get("/getAllBlog", blogController.getAllBlog);
 router.get("/getBlog/:blogId", blogController.getBlog);
 router.get(
