@@ -102,7 +102,7 @@ exports.forgotPassword = async (req, res, next) => {
     // await user.save(); // error block yet to be implemented
     // SEND EMAIL via Node Mailer
     // const resetURL = `http://localhost:4000/resetPassword/${resetToken}`;
-    const resetURL = `https://blogger-world.vercel.app/resetPassword/${resetToken}`;
+    const resetURL = ` https://blogger-world.vercel.app/resetPassword/${resetToken}`;
 
     const message = `Forgot your password ? submit a patch reqest with your new password click to ${resetURL}`;
     try {
