@@ -58,6 +58,7 @@ exports.login = async (req, res, next) => {
     });
   } catch (err) {
     console.log("error");
+    console.log(err);
   }
 };
 exports.protect = async (req, res, next) => {
