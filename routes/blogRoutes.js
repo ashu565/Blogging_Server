@@ -14,6 +14,8 @@ router.post(
 );
 router.get("/getAllBlog", blogController.getAllBlog);
 router.get("/getBlog/:blogId", blogController.getBlog);
+router.get("/getAllTags", blogController.getAllTags);
+router.post("/getTaggedBlogs", blogController.getTaggedBlogs);
 router.get(
   "/getAllBlogFromUser/:id",
   authController.protect,

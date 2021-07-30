@@ -3,11 +3,12 @@ const APIFeatures = require("../utils/ApiFeatures");
 const cloudinary = require("../utils/cloudinary");
 exports.createBlog = async (req, res, next) => {
   try {
-    const { author, title, description } = req.body;
+    const { author, title, description, tags } = req.body;
     const document = await Blog.create({
       author,
       title,
       description,
+      tags,
     });
     res.status(201).json({
       status: "success",
@@ -46,6 +47,29 @@ exports.getBlog = async (req, res, next) => {
   }
 };
 
+exports.getAllTags = async (req, res, next) => {
+  try {
+    const data = await Blog.find();
+    const tag_values = new Map();
+    data.forEach((blog) => {
+      blog.tags.forEach((tag) => {
+        if (tag_values.get(tag) === undefined) {
+          tag_values.set(tag, 1);
+        } else {
+          const temp = tag_values.get(tag);
+          tag_values.set(tag, temp + 1);
+        }
+      });
+    });
+    const tag_values_object = Object.fromEntries(tag_values);
+    res.status(201).json({
+      tag_values_object,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
 exports.searchedBlog = async (req, res, next) => {
   try {
     const searched_word = req.query.word;
@@ -54,6 +78,20 @@ exports.searchedBlog = async (req, res, next) => {
         $search: searched_word,
         $caseSensitive: false,
       },
+    });
+    res.status(201).json({
+      document,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.getTaggedBlogs = async (req, res, next) => {
+  try {
+    const { tags } = req.body; // tags is an array
+    const document = await Blog.find({
+      tags: { $all: tags },
     });
     res.status(201).json({
       document,
