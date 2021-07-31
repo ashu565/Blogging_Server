@@ -3,12 +3,13 @@ const APIFeatures = require("../utils/ApiFeatures");
 const cloudinary = require("../utils/cloudinary");
 exports.createBlog = async (req, res, next) => {
   try {
-    const { author, title, description, tags } = req.body;
+    const { author, title, description, tags, body } = req.body;
     const document = await Blog.create({
       author,
       title,
       description,
       tags,
+      body,
     });
     res.status(201).json({
       status: "success",

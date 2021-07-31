@@ -4,8 +4,13 @@ const blogSchema = mongoose.Schema(
   {
     title: {
       type: String,
+      required: "A Blog Must Have a title",
     },
     description: {
+      type: String,
+      required: "A Blog Must Have a description",
+    },
+    body: {
       type: String,
     },
     createdAt: {
@@ -55,7 +60,7 @@ blogSchema.index({
 blogSchema.pre(/^find/, function (next) {
   this.populate({
     path: "author",
-    select: "first_name last_name",
+    select: "first_name last_name avatar",
   });
   next();
 });
