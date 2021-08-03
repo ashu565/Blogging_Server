@@ -11,7 +11,7 @@ exports.createBlog = async (req, res, next) => {
       tags,
       body,
     });
-    res.status(201).json({
+    res.status(204).json({
       status: "success",
       data: {
         document,

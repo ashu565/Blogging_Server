@@ -23,7 +23,7 @@ exports.signup = async (req, res, next) => {
     user.password = undefined;
     user.passwordConfirm = undefined;
     // user.save(); don't do this to avoid reflection
-    res.status(201).json({
+    res.status(204).json({
       status: "success",
       data: {
         user,
