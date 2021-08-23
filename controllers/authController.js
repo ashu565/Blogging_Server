@@ -7,6 +7,7 @@ const AppError = require("../utils/AppError");
 
 exports.signup = async (req, res, next) => {
   try {
+    console.log(req.body);
     const { email, password, passwordConfirm, first_name, last_name } =
       req.body;
     if (password !== passwordConfirm) {
@@ -23,7 +24,7 @@ exports.signup = async (req, res, next) => {
     user.password = undefined;
     user.passwordConfirm = undefined;
     // user.save(); don't do this to avoid reflection
-    res.status(204).json({
+    res.status(201).json({
       status: "success",
       data: {
         user,
@@ -183,7 +184,7 @@ exports.updatePassword = async (req, res, next) => {
     user.password = undefined;
     user.passwordConfirm = undefined;
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
-    res.status(201).json({
+    res.status(200).json({
       status: "success",
       data: null,
     });
