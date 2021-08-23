@@ -8,7 +8,7 @@ exports.getAllComments = async (req, res, next) => {
       .sort()
       .paginate();
     const document = await features.query;
-    res.status(201).json({
+    res.status(200).json({
       comment: document,
     });
   } catch (err) {
@@ -36,7 +36,7 @@ exports.createComment = async (req, res, next) => {
 exports.deleteComment = async (req, res, next) => {
   try {
     await Comment.findByIdAndDelete(req.params.id);
-    res.status(201).json({
+    res.status(204).json({
       status: "success",
       data: null,
     });
@@ -55,7 +55,7 @@ exports.updateComment = async (req, res, next) => {
         new: true,
       }
     );
-    res.status(204).json({
+    res.status(200).json({
       status: "success",
       data: updatedData,
     });

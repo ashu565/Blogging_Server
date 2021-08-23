@@ -60,7 +60,7 @@ exports.updateProfilePhoto = async (req, res, next) => {
       },
       { new: true }
     );
-    res.status(200).json({
+    res.status(201).json({
       status: "success",
       data: {
         newUser,
@@ -82,7 +82,7 @@ exports.deleteProfilePhoto = async (req, res, next) => {
       validateBeforeSave: false,
       new: true,
     });
-    res.status(201).json({
+    res.status(204).json({
       status: "success",
       data: null,
     });

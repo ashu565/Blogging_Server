@@ -11,7 +11,7 @@ exports.createBlog = async (req, res, next) => {
       tags,
       body,
     });
-    res.status(204).json({
+    res.status(201).json({
       status: "success",
       data: {
         document,
@@ -25,7 +25,7 @@ exports.getAllBlog = async (req, res, next) => {
   try {
     const features = new APIFeatures(Blog.find(), req.query).filter().sort();
     const document = await features.query;
-    res.status(201).json({
+    res.status(200).json({
       document,
     });
   } catch (err) {
@@ -63,7 +63,7 @@ exports.getAllTags = async (req, res, next) => {
       });
     });
     const tag_values_object = Object.fromEntries(tag_values);
-    res.status(201).json({
+    res.status(200).json({
       tag_values_object,
     });
   } catch (err) {
@@ -80,7 +80,7 @@ exports.searchedBlog = async (req, res, next) => {
         $caseSensitive: false,
       },
     });
-    res.status(201).json({
+    res.status(200).json({
       document,
     });
   } catch (err) {
@@ -94,7 +94,7 @@ exports.getTaggedBlogs = async (req, res, next) => {
     const document = await Blog.find({
       tags: { $all: tags },
     });
-    res.status(201).json({
+    res.status(200).json({
       document,
     });
   } catch (err) {
